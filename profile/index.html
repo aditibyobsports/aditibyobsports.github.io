@@ -21,7 +21,7 @@
 
       <p class="muted" id="fallback" style="display:none">
         Don’t have the app?
-        <a id="storeLink" href="https://play.google.com/store/apps/details?id=com.byob.sports">Get it on Google Play</a> •
+        <a href="https://play.google.com/store/apps/details?id=com.byob.sports">Get it on Google Play</a> •
         <!-- <a href="https://apps.apple.com/app/idYOUR_APPLE_ID">App Store</a> -->
       </p>
 
@@ -31,23 +31,19 @@
       </div>
     </div>
 
-    <script>
+   <script>
   const qs = new URLSearchParams(location.search);
-  const userId  = qs.get('userId');
-  const username = qs.get('u');
+  const userId = qs.get('userId');
 
-  // Route your app understands
-  const appPath = username ? `/u/${username}` : `/profile/${userId}`;
+  // Path for your Expo Router
+  const appPath = /profile/${userId};
 
-  // CUSTOM SCHEME (works today without a domain association)
+  // Try https first (when you later add a real domain), then custom scheme (works now)
   const scheme = `byobsports://${appPath}`;
+  // If you don't have a custom domain yet, you can skip a universal link
+  // or just point it to your GitHub page to avoid extra redirects.
 
-  // Button link
-  document.getElementById('open').href = scheme;
-
-  // Auto-attempt deep link after a short delay
-  setTimeout(() => { location.href = scheme; }, 300);
+  setTimeout(() => { location.href = scheme; }, 300); // open app
 </script>
-
   </body>
 </html>
